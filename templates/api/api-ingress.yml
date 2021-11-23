@@ -1,6 +1,6 @@
 {{- if .Values.api.enabled -}}
 {{- if .Values.api.ingress.enabled -}}
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ template "reactioncommerce.fullname" . }}-api
@@ -25,9 +25,12 @@ spec:
     - http:
         paths:
           - path: {{ .Values.api.ingress.path }}
+            pathType: Prefix
             backend:
-              serviceName: {{ template "reactioncommerce.fullname" . }}-api
-              servicePort: api
+              service:
+                name: {{ template "reactioncommerce.fullname" . }}-api
+                port:
+                  name: api
       host: {{ .Values.api.host }}
 {{- end }}
 {{- end }}

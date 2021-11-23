@@ -1,6 +1,6 @@
 {{- if .Values.hydra.enabled -}}
 {{- if .Values.hydra.frontend.ingress.enabled -}}
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ template "reactioncommerce.fullname" . }}-hydra-frontend
@@ -25,14 +25,17 @@ spec:
     - http:
         paths:
           - path: {{ .Values.hydra.frontend.ingress.path }}
+            pathType: Prefix
             backend:
-              serviceName: {{ template "reactioncommerce.fullname" . }}-hydra
-              servicePort: hydra
+              service:
+                name: {{ template "reactioncommerce.fullname" . }}-hydra
+                port:
+                  name: hydra
       host: {{ .Values.hydra.frontend.host }}
 {{- end }}
 ---
 {{- if .Values.hydra.admin.ingress.enabled -}}
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ template "reactioncommerce.fullname" . }}-hydra-admin
@@ -57,9 +60,12 @@ spec:
     - http:
         paths:
           - path: {{ .Values.hydra.admin.ingress.path }}
+            pathType: Prefix
             backend:
-              serviceName: {{ template "reactioncommerce.fullname" . }}-hydra
-              servicePort: admin
+              service:
+                name: {{ template "reactioncommerce.fullname" . }}-hydra
+                port: 
+                  name: admin
       host: {{ .Values.hydra.admin.host }}
 {{- end }}
 {{- end }}
