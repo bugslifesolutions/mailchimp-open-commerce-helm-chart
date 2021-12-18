@@ -23,4 +23,7 @@ spec:
     - name: "identity"
       port: 4100
       targetPort: 4100
+  {{- if .Values.identity.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.identity.service.loadBalancerIP }}
+  {{- end }}
 {{- end }}

@@ -23,4 +23,7 @@ spec:
     - name: "api"
       port: 3000
       targetPort: 3000
+  {{- if .Values.api.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.api.service.loadBalancerIP }}
+  {{- end }}
 {{- end }}

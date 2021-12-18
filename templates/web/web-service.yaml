@@ -23,4 +23,7 @@ spec:
     - name: "web"
       port: 4000
       targetPort: 4000
+  {{- if .Values.web.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.web.service.loadBalancerIP }}
+  {{- end }}
 {{- end }}

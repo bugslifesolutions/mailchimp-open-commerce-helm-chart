@@ -29,4 +29,7 @@ spec:
     - name: "tokens"
       port: 5555
       targetPort: 5555
+  {{- if .Values.hydra.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.hydra.service.loadBalancerIP }}
+  {{- end }}
 {{- end }}

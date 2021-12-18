@@ -26,4 +26,7 @@ spec:
     # - name: "inspection"
     #   port: 9231
     #   targetPort: 9229
+  {{- if .Values.admin.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.admin.service.loadBalancerIP }}
+  {{- end }}
 {{- end }}
