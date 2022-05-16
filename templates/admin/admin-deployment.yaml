@@ -30,7 +30,7 @@ spec:
       {{- end }}
       containers:
       - name: {{ .Chart.Name }}-admin
-        image: "{{ .Values.admin.image.repository }}:{{ .Values.admin.image.tag }}"
+        image: "{{ .Values.admin.image.ref }}"
         imagePullPolicy: {{ .Values.admin.image.pullPolicy }}
         ports:
           - name: admin

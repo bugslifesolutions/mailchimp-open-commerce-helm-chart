@@ -29,16 +29,17 @@ spec:
         imagePullSecrets:
           - name: {{ .Values.web.image.imagePullSecret }}
         {{- end }}
-        - name: {{ .Chart.Name }}-web
-          image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag }}"
-          imagePullPolicy: {{ .Values.web.image.pullPolicy }}
-          ports:
-            - name: web
-              containerPort: 4000
-              protocol: TCP
-          envFrom:
-            - secretRef:
-                name: {{ template "reactioncommerce.fullname" . }}
-            - configMapRef:
-                name: {{ template "reactioncommerce.fullname" . }}-web
+      - name: {{ .Chart.Name }}-web
+        lifecycle:
+        image: "{{ .Values.web.image.ref }}"
+        imagePullPolicy: {{ .Values.web.image.pullPolicy }}
+        ports:
+          - name: web
+            containerPort: 4000
+            protocol: TCP
+        envFrom:
+          - configMapRef:
+              name: {{ template "reactioncommerce.fullname" . }}-web
+          - secretRef:
+              name: {{ template "reactioncommerce.fullname" . }}
 {{- end }}

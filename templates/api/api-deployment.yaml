@@ -17,7 +17,6 @@ spec:
       app: {{ template "reactioncommerce.name" . }}
       component: api
       release: {{ .Release.Name }}
-  replicas: {{ .Values.api.replicaCount }}
   template:
     metadata:
       labels:
@@ -31,7 +30,7 @@ spec:
       {{- end }}
       containers:
       - name: {{ .Chart.Name }}-api
-        image: "{{ .Values.api.image.repository }}:{{ .Values.api.image.tag }}"
+        image: "{{ .Values.api.image.ref }}"
         imagePullPolicy: {{ .Values.api.image.pullPolicy }}
         ports:
           - name: api
