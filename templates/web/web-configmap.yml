@@ -15,9 +15,12 @@ data:
   TZ: "Etc/UTC"
   NODE_ENV: "production"
   CANONICAL_URL: {{ include "reactioncommerce.web.url" . | quote }}
+  ROOT_URL: {{ include "reactioncommerce.web.url" . | quote }}
+  STORE_URL: {{ include "reactioncommerce.web.url" . | quote }}
   ENABLE_SPA_ROUTING: "true"
   BUILD_GRAPHQL_URL: {{ printf "%s/graphql" ( include "reactioncommerce.api.url" . ) | quote }}
   EXTERNAL_GRAPHQL_URL: {{ printf "%s/graphql" ( include "reactioncommerce.api.url" . ) | quote }}
+  EXTERNAL_SEARCH_URL: {{ .Values.global.searchUrl | quote }}
   INTERNAL_GRAPHQL_URL: {{ printf "http://%s-api.%s.svc:3000/graphql" ( include "reactioncommerce.fullname" . ) .Release.Namespace | quote }}
   OAUTH2_ADMIN_PORT: "4445"
   OAUTH2_ADMIN_URL: {{ printf "http://%s-hydra.%s.svc:4445" ( include "reactioncommerce.fullname" . ) .Release.Namespace | quote }}
